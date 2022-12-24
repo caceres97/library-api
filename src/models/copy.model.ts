@@ -25,7 +25,7 @@ const Copy = sequelize.define("tbl_copies", {
         },
         field: "book_id"
     },
-    status: DataTypes.CHAR(2),
+    status: DataTypes.CHAR(1),
     createdAt: {
         type: DataTypes.DATE,
         field: "created_at"
@@ -35,8 +35,5 @@ const Copy = sequelize.define("tbl_copies", {
         field: "updated_at"
     }
 });
-
-Copy.belongsTo(Book, {foreignKey: "book_id"})
-Book.hasMany(Copy, { foreignKey: "id" });
 
 export { CopyI, Copy }

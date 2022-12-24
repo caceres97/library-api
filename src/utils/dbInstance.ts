@@ -25,8 +25,8 @@ class SequelizeInstance {
       },
       define: {
         timestamps: true,
-        createdAt: "created_at",
-        updatedAt: "updated_at"
+        // createdAt: "created_at",
+        // updatedAt: "updated_at"
       },
       pool: {
         max: 5,

@@ -2,6 +2,7 @@ import sequelize from "../utils/dbInstance";
 import { DataTypes } from "sequelize";
 import { Book } from "./book.model";
 import { User } from "./user.model";
+import { Copy } from "./copy.model";
 
 interface RentalI {
     id: string
@@ -33,10 +34,10 @@ const Rental = sequelize.define("tbl_rentals", {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: Book,
+            model: Copy,
             key: "id"
         },
-        field: "book_id"
+        field: "copy_id"
     },
     startDate: {
         type: DataTypes.DATE,
@@ -63,7 +64,7 @@ const Rental = sequelize.define("tbl_rentals", {
     }
 });
 
-Rental.hasOne(User, { foreignKey: "user_id" });
-Rental.hasOne(Book, { foreignKey: "book_id" });
+// Rental.hasOne(User, { foreignKey: "user_id" });
+// Rental.hasOne(Copy, { foreignKey: "copy_id" });
 
 export { RentalI, Rental }
