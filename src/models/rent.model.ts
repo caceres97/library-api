@@ -22,6 +22,7 @@ const Rental = sequelize.define("tbl_rentals", {
     },
     user: {
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
             model: User,
             key: "id"
@@ -30,6 +31,7 @@ const Rental = sequelize.define("tbl_rentals", {
     },
     book: {
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
             model: Book,
             key: "id"
@@ -38,15 +40,18 @@ const Rental = sequelize.define("tbl_rentals", {
     },
     startDate: {
         type: DataTypes.DATE,
-        field: "start_date"
+        field: "start_date",
+        allowNull: false,
     },
     endDate: {
         type: DataTypes.DATE,
-        field: "end_date"
+        field: "end_date",
+        allowNull: false,
     },
     isActive:  {
         type: DataTypes.BOOLEAN,
-        field: "is_active"
+        field: "is_active",
+        allowNull: false,
     },
     createdAt: {
         type: DataTypes.DATE,

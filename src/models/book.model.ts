@@ -1,5 +1,5 @@
 import sequelize from "../utils/dbInstance";
-import { DataTypes } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { Copy } from "./copy.model";
 import { Genre } from "./genre.model";
 import { Author } from "./author.model";
@@ -22,17 +22,19 @@ const Book = sequelize.define("tbl_books", {
         type: DataTypes.INTEGER,
     },
     name: DataTypes.STRING,
-    publicationYear: DataTypes.NUMBER,
-    genre:  {
+    publicationYear: DataTypes.INTEGER,
+    genre: {
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
             model: Genre,
             key: "id"
         },
         field: "genre_id"
     },
-    author:  {
+    author: {
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
             model: Author,
             key: "id"
@@ -40,12 +42,20 @@ const Book = sequelize.define("tbl_books", {
         field: "author_id"
     },
     remark: DataTypes.STRING,
-    created_at: DataTypes.DATE,
-    updated_at: DataTypes.DATE,
+    createdAt: {
+        type: DataTypes.DATE,
+        field: "created_at"
+    },
+    updatedAt: {
+        type: DataTypes.DATE,
+        field: "updated_at"
+    }
 });
 
-Book.hasMany(Copy);
-Book.hasOne(Author);
-Book.hasOne(Genre);
+Book.hasOne(Genre, {foreignKey: "id"});
+Genre.hasMany(Book, { foreignKey: "genre_id" });
+
+Book.hasOne(Author, {foreignKey: "id"});
+Author.hasMany(Book, { foreignKey: "author_id" });
 
 export { BookI, Book }

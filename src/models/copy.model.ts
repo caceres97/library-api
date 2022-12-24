@@ -18,6 +18,7 @@ const Copy = sequelize.define("tbl_copies", {
     },
     bookId: {
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
             model: Book,
             key: "id"
@@ -34,5 +35,7 @@ const Copy = sequelize.define("tbl_copies", {
         field: "updated_at"
     }
 });
+
+Book.hasMany(Copy, { foreignKey: "book_id" });
 
 export { CopyI, Copy }

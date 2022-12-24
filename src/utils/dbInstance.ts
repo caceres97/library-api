@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import { Sequelize } from "sequelize";
+import fs from "fs";
 
 class SequelizeInstance {
   public sqInstance: Sequelize;
@@ -17,6 +18,11 @@ class SequelizeInstance {
       host: dbHost,
       port: dbPort,
       dialect: "postgres",
+      dialectOptions: {
+        ssl: {
+          ca: fs.readFileSync(__dirname + "/ca-certificate.crt")
+        }
+      },
       define: {
         timestamps: true,
         createdAt: "created_at",

@@ -6,7 +6,10 @@
   "scripts": {
     "test": "npm run tests",
     "build": "tsc -p tsconfig.json",
-    "start": "nodemon"
+    "start": "nodemon",
+    "create:database": "ts-node ./migrations/createTables.ts",
+    "create:tables": "ts-node ./migrations/createTables.ts",
+    "create:undo": "ts-node ./migrations/createTables.ts"
   },
   "author": "Angel Caceres",
   "license": "ISC",
@@ -19,7 +22,8 @@
     "express": "^4.18.2",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
-    "sequelize": "^6.27.0",
+    "pg": "^8.8.0",
+    "sequelize": "^6.28.0",
     "ts-node": "^10.9.1",
     "typedi": "^0.10.0",
     "typescript": "^4.9.4"

@@ -1,5 +1,6 @@
 import sequelize from "../utils/dbInstance";
 import { DataTypes } from "sequelize";
+import { Book } from "./book.model";
 
 interface AuthorI {
     id: string
@@ -14,7 +15,10 @@ const Author = sequelize.define("tbl_authors", {
         autoIncrement: true,
         type: DataTypes.INTEGER,
     },
-    name: DataTypes.STRING,
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     createdAt: {
         type: DataTypes.DATE,
         field: "created_at"
@@ -24,5 +28,7 @@ const Author = sequelize.define("tbl_authors", {
         field: "updated_at"
     }
 });
+
+// Author.hasMany(Book, { foreignKey: "author_id" });
 
 export { AuthorI, Author }
