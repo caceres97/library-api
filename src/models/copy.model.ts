@@ -16,7 +16,7 @@ const Copy = sequelize.define("tbl_copies", {
         autoIncrement: true,
         type: DataTypes.INTEGER,
     },
-    bookId: {
+    book: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -36,6 +36,7 @@ const Copy = sequelize.define("tbl_copies", {
     }
 });
 
-Book.hasMany(Copy, { foreignKey: "book_id" });
+Copy.belongsTo(Book, {foreignKey: "book_id"})
+Book.hasMany(Copy, { foreignKey: "id" });
 
 export { CopyI, Copy }

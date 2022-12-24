@@ -29,6 +29,4 @@ const Author = sequelize.define("tbl_authors", {
     }
 });
 
-// Author.hasMany(Book, { foreignKey: "author_id" });
-
 export { AuthorI, Author }

@@ -1,7 +1,7 @@
 import express, { Application } from "express";
 import morgan from "morgan";
 import cors from "cors";
-// import userRoutes from "./routes/userRoutes";
+import userRoutes from "./routes/user.routes";
 
 class Server {
   public app: Application;
@@ -21,7 +21,7 @@ class Server {
   }
 
   routes(): void {
-    // this.app.use("/users", userRoutes);
+    this.app.use("/users", userRoutes);
   }
 
   start(): void {

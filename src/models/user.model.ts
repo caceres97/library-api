@@ -32,7 +32,9 @@ const User = sequelize.define("tbl_users", {
     },
     isAdmin: {
         type: DataTypes.BOOLEAN,
-        field: "is_admin"
+        field: "is_admin",
+        allowNull: false,
+        defaultValue: false
     },
     createdAt: {
         type: DataTypes.DATE,
