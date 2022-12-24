@@ -13,6 +13,10 @@ class UserRoutes {
         this.router.post("/login", UserController.loginUser);
     }
 
+    public userRentals = () => {
+        this.router.post("/:uid/rentals", UserController.createUser);
+    }
+
     public createUser = () => {
         this.router.post("/", UserController.createUser);
     }

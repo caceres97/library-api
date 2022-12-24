@@ -2,6 +2,8 @@ import express, { Application } from "express";
 import morgan from "morgan";
 import cors from "cors";
 import userRoutes from "./routes/user.routes";
+import bookRoutes from "./routes/book.routes";
+import rentRoutes from "./routes/rent.routes";
 
 class Server {
   public app: Application;
@@ -22,6 +24,8 @@ class Server {
 
   routes(): void {
     this.app.use("/users", userRoutes);
+    this.app.use("/books", bookRoutes);
+    this.app.use("/rentals", rentRoutes);
   }
 
   start(): void {
