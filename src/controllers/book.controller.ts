@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { Op, Sequelize } from "sequelize";
 import { Service } from "typedi";
 import { Author } from "../models/author.model";
 import { Book } from "../models/book.model";
@@ -10,21 +11,62 @@ class BookController {
     constructor() { }
 
     getBook = async (_req: Request, res: Response) => {
-        const { bid } = _req.params;
-        const bookData = await Book.findByPk(bid, {
-            attributes: ["name", "publicationYear", "remark"],
-            include: [
-                { model: Author, attributes: ["id", "name"] },
-                { model: Genre, attributes: ["id", "name"] },
-                { model: Copy, attributes: ["id", "status"], where: { status: "A" } },
-            ]
-        });
+        try {
+            const { bid } = _req.params;
+            const bookData = await Book.findByPk(bid, {
+                attributes: ["id", "name", "publicationYear", "remark"],
+                include: [
+                    { model: Author, attributes: ["id", "name"] },
+                    { model: Genre, attributes: ["id", "name"] },
+                    { model: Copy, attributes: ["id", "status"], where: { status: "A" } },
+                ]
+            });
 
-        return res.status(200).send({ data: bookData })
+            return res.status(200).send(bookData)
+        } catch (error) {
+            return res.status(500).send({ error })
+        }
     }
 
     getBooks = async (_req: Request, res: Response) => {
+        try {
+            const { name, author, genre, publicationYear, available } = _req.query;
 
+            let whereQuery: any = {}
+
+            if (name) { whereQuery["name"] = { [Op.like]: `%${name}%` }; }
+            if (author) { whereQuery["author"] = author; }
+            if (genre) { whereQuery["genre"] = genre; }
+            if (publicationYear) {
+                const pub = String(publicationYear)
+
+                if (pub.includes(",")) {
+                    const year = pub.split(",");
+                    whereQuery["publicationYear"] = { [Op.between]: [year[0], year[1]] };
+                } else {
+                    whereQuery["publicationYear"] = publicationYear;
+                }
+            }
+
+            var subQuery: any = {}
+            if (available !== "all") {
+                subQuery.status = "A"
+            }
+
+            const bookData = await Book.findAll({
+                attributes: ["id", "name", "publicationYear", "remark"],
+                include: [
+                    { model: Author, attributes: ["id", "name"] },
+                    { model: Genre, attributes: ["id", "name"] },
+                    { model: Copy, attributes: ["id", "status"], where: subQuery }
+                ],
+                where: whereQuery
+            });
+
+            return res.status(200).send(bookData)
+        } catch (error) {
+            return res.status(500).send({ error })
+        }
     }
 
     createBook = async (_req: Request, res: Response) => {

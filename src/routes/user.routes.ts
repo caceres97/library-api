@@ -5,16 +5,22 @@ class UserRoutes {
     public router: Router = Router();
 
     constructor() {
-        this.createUser();
         this.loginUser();
+        this.getUser();
+        this.userRentals();
+        this.createUser();
     }
 
     public loginUser = () => {
         this.router.post("/login", UserController.loginUser);
     }
 
+    public getUser = () => {
+        this.router.get("/", UserController.getUser);
+    }
+
     public userRentals = () => {
-        this.router.post("/:uid/rentals", UserController.createUser);
+        this.router.get("/:uid/rentals", UserController.getUserRentals);
     }
 
     public createUser = () => {

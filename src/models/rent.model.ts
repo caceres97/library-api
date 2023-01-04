@@ -49,7 +49,7 @@ const Rental = sequelize.define("tbl_rentals", {
         field: "end_date",
         allowNull: false,
     },
-    isActive:  {
+    isActive: {
         type: DataTypes.BOOLEAN,
         field: "is_active",
         allowNull: false,
@@ -64,7 +64,7 @@ const Rental = sequelize.define("tbl_rentals", {
     }
 });
 
-// Rental.hasOne(User, { foreignKey: "user_id" });
-// Rental.hasOne(Copy, { foreignKey: "copy_id" });
+Rental.hasOne(User, { sourceKey: "user", foreignKey: "id" });
+Rental.hasOne(Copy, { sourceKey: "book", foreignKey: "id" });
 
 export { RentalI, Rental }
