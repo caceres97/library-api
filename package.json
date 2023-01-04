@@ -7,9 +7,9 @@
     "test": "npm run tests",
     "build": "tsc -p tsconfig.json",
     "start": "nodemon",
-    "create:database": "ts-node ./migrations/createTables.ts",
-    "create:tables": "ts-node ./migrations/createTables.ts",
-    "create:undo": "ts-node ./migrations/createTables.ts"
+    "create:database": "ts-node ./src/migrations/createTables.ts",
+    "create:tables": "ts-node ./src/migrations/createTables.ts",
+    "create:undo": "ts-node ./src/migrations/createTables.ts"
   },
   "author": "Angel Caceres",
   "license": "ISC",

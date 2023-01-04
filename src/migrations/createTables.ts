@@ -1,9 +1,9 @@
-import { User } from "../src/models/user.model";
-import { Author } from "../src/models/author.model";
-import { Genre } from "../src/models/genre.model";
-import { Copy } from "../src/models/copy.model";
-import { Book } from "../src/models/book.model";
-import { Rental } from "../src/models/rent.model";
+import { User } from "./../models/user.model";
+import { Author } from "./../models/author.model";
+import { Genre } from "./../models/genre.model";
+import { Copy } from "./../models/copy.model";
+import { Book } from "./../models/book.model";
+import { Rental } from "./../models/rent.model";
 //If I need another table we can import and put it in the up()
 
 class MigrateTables {
