@@ -54,6 +54,5 @@ const Book = sequelize.define("tbl_books", {
 
 Book.hasOne(Author, { sourceKey: "author", foreignKey: "id" });
 Book.hasOne(Genre, { sourceKey: "genre", foreignKey: "id" });
-Book.hasMany(Copy, { sourceKey: "id", foreignKey: "book" });
 
 export { BookI, Book }

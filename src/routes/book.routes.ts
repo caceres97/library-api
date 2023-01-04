@@ -9,7 +9,6 @@ class BookRoutes {
         this.getBooks();
         this.createBook();
         this.updateBook();
-        this.changeCopyStatus();
         this.deleteBook();
     }
 
@@ -27,10 +26,6 @@ class BookRoutes {
 
     public updateBook = () => {
         this.router.put("/:bid", () => { });
-    }
-
-    public changeCopyStatus = () => {
-        this.router.patch("/:bid/copy/:cid/status", () => { });
     }
 
     public deleteBook = () => {

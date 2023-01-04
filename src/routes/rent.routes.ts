@@ -1,29 +1,30 @@
 import { Router } from "express";
+import rentController from "../controllers/rent.controller";
 
 class RentRoutes {
     public router: Router = Router();
 
     constructor() {
         this.getRent();
-        this.getRentas();
+        this.getRentals();
         this.createRent();
         this.closeRent();
     }
 
     public getRent = () => {
-        this.router.get("/", () => {});
+        this.router.get("/:rid", rentController.getRent);
     }
 
-    public getRentas = () => {
-        this.router.get("/", () => {});
+    public getRentals = () => {
+        this.router.get("/", rentController.getRentals);
     }
 
     public createRent = () => {
-        this.router.post("/users/:uid/book/:bid", () => {});
+        this.router.post("/users/:uid/books/:bid", rentController.createRent);
     }
 
     public closeRent = () => {
-        this.router.patch("/:rid/users/:uid/book/:bid", () => {});
+        this.router.patch("/:rid/users/:uid/books/:bid", rentController.closeRent);
     }
 }
 

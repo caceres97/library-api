@@ -4,6 +4,7 @@ import cors from "cors";
 import userRoutes from "./routes/user.routes";
 import bookRoutes from "./routes/book.routes";
 import rentRoutes from "./routes/rent.routes";
+import utilRoutes from "./routes/util.routes";
 
 class Server {
   public app: Application;
@@ -26,6 +27,7 @@ class Server {
     this.app.use("/users", userRoutes);
     this.app.use("/books", bookRoutes);
     this.app.use("/rentals", rentRoutes);
+    this.app.use("/utils", utilRoutes);
   }
 
   start(): void {

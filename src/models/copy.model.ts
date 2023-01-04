@@ -36,4 +36,7 @@ const Copy = sequelize.define("tbl_copies", {
     }
 });
 
+Copy.belongsTo(Book, { foreignKey: "book" })
+Book.hasMany(Copy, { sourceKey: "id", foreignKey: "book" });
+
 export { CopyI, Copy }
